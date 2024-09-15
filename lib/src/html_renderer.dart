@@ -140,6 +140,9 @@ class HtmlRenderer implements NodeVisitor {
 
     buffer.write('<${element.tag}');
 
+    buffer.write(
+        ' data-start-line="${element.startLine}" data-end-line="${element.endLine}"');
+
     for (final entry in element.attributes.entries) {
       buffer.write(' ${entry.key}="${entry.value}"');
     }

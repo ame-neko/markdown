@@ -175,7 +175,10 @@ class BlockParser {
         if (syntax.canParse(this)) {
           _previousSyntax = _currentSyntax;
           _currentSyntax = syntax;
+          final startLine = _pos;
           final block = syntax.parse(this);
+          block?.startLine = startLine;
+          block?.endLine = _pos;
           if (block != null) {
             blocks.add(block);
           }

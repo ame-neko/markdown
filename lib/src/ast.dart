@@ -11,6 +11,9 @@ abstract class Node {
   void accept(NodeVisitor visitor);
 
   String get textContent;
+
+  int startLine = 0;
+  int endLine = 0;
 }
 
 /// A named tag that can contain other nodes.
@@ -61,6 +64,12 @@ class Element implements Node {
         ? ''
         : children.map((child) => child.textContent).join();
   }
+
+  @override
+  int endLine = 0;
+
+  @override
+  int startLine = 0;
 }
 
 /// A plain text element.
@@ -74,6 +83,12 @@ class Text implements Node {
 
   @override
   String get textContent => text;
+
+  @override
+  int endLine = 0;
+
+  @override
+  int startLine = 0;
 }
 
 /// Inline content that has not been parsed into inline nodes (strong, links,
@@ -90,6 +105,12 @@ class UnparsedContent implements Node {
 
   @override
   void accept(NodeVisitor visitor) {}
+
+  @override
+  int endLine = 0;
+
+  @override
+  int startLine = 0;
 }
 
 /// Visitor pattern for the AST.
